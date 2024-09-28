@@ -1,9 +1,4 @@
-# Author: Milan Lysonek
-#
-# See the LICENSE file for legal information regarding use of this file.
-
 """Helper functions for output formatting"""
-
 
 def none_as_unknown(text, number):
     """
@@ -14,6 +9,4 @@ def none_as_unknown(text, number):
     :type number: int
     :param number: number used in text
     """
-    if not text:
-        text = "unknown({0})".format(number)
-    return text
+    pass

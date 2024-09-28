@@ -1,10 +1,5 @@
-# Author: Stanislav Zidek
-# See the LICENSE file for legal information regarding use of this file.
-
 """Abstract class for ECDSA."""
-
 from .cryptomath import secureHash
-
 
 class ECDSAKey(object):
     """This is an abstract base class for ECDSA keys.
@@ -43,16 +38,7 @@ class ECDSAKey(object):
 
         :rtype: bool
         """
-        raise NotImplementedError()
-
-    def _sign(self, data, hash_alg):
-        raise NotImplementedError()
-
-    def _hashAndSign(self, data, hAlg):
-        raise NotImplementedError()
-
-    def _verify(self, signature, hash_bytes):
-        raise NotImplementedError()
+        pass
 
     def hashAndSign(self, bytes, rsaScheme=None, hAlg='sha1', sLen=None):
         """Hash and sign the passed-in bytes.
@@ -75,13 +61,9 @@ class ECDSAKey(object):
         :rtype: bytearray
         :returns: An ECDSA signature on the passed-in data.
         """
-        hAlg = hAlg.lower()
-        hashBytes = secureHash(bytearray(bytes), hAlg)
-        return self.sign(hashBytes, padding=rsaScheme, hashAlg=hAlg,
-                         saltLen=sLen)
+        pass
 
-    def hashAndVerify(self, sigBytes, bytes, rsaScheme=None, hAlg='sha1',
-                      sLen=None):
+    def hashAndVerify(self, sigBytes, bytes, rsaScheme=None, hAlg='sha1', sLen=None):
         """Hash and verify the passed-in bytes with the signature.
 
         This verifies an ECDSA signature on the passed-in data
@@ -105,12 +87,9 @@ class ECDSAKey(object):
         :rtype: bool
         :returns: Whether the signature matches the passed-in data.
         """
-        hAlg = hAlg.lower()
+        pass
 
-        hashBytes = secureHash(bytearray(bytes), hAlg)
-        return self.verify(sigBytes, hashBytes, rsaScheme, hAlg, sLen)
-
-    def sign(self, bytes, padding=None, hashAlg="sha1", saltLen=None):
+    def sign(self, bytes, padding=None, hashAlg='sha1', saltLen=None):
         """Sign the passed-in bytes.
 
         This requires the key to have a private component.  It performs
@@ -132,11 +111,9 @@ class ECDSAKey(object):
         :rtype: bytearray
         :returns: An ECDSA signature on the passed-in data.
         """
-        sigBytes = self._sign(bytes, hashAlg)
-        return sigBytes
+        pass
 
-    def verify(self, sigBytes, bytes, padding=None, hashAlg=None,
-               saltLen=None):
+    def verify(self, sigBytes, bytes, padding=None, hashAlg=None, saltLen=None):
         """Verify the passed-in bytes with the signature.
 
         This verifies a PKCS1 signature on the passed-in data.
@@ -153,7 +130,7 @@ class ECDSAKey(object):
         :rtype: bool
         :returns: Whether the signature matches the passed-in data.
         """
-        return self._verify(sigBytes, bytes)
+        pass
 
     def acceptsPassword(self):
         """Return True if the write() method accepts a password for use
@@ -161,7 +138,7 @@ class ECDSAKey(object):
 
         :rtype: bool
         """
-        raise NotImplementedError()
+        pass
 
     def write(self, password=None):
         """Return a string containing the key.
@@ -170,7 +147,7 @@ class ECDSAKey(object):
         :returns: A string describing the key, in whichever format (PEM)
             is native to the implementation.
         """
-        raise NotImplementedError()
+        pass
 
     @staticmethod
     def generate(bits):
@@ -178,4 +155,4 @@ class ECDSAKey(object):
 
         :rtype: ~tlslite.utils.ECDSAKey.ECDSAKey
         """
-        raise NotImplementedError()
+        pass
