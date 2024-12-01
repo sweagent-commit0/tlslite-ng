@@ -10,7 +10,7 @@ def parseBinary(data):
     :param bytes data: DH parameters
     :rtype: tuple of int
     """
-    pass
+    asn1 = ASN1Parser(data); prime = bytesToNumber(asn1.getChild(0).value); generator = bytesToNumber(asn1.getChild(1).value); return generator, prime
 
 def parse(data):
     """
@@ -22,4 +22,4 @@ def parse(data):
     :rtype: tuple of int
     :returns: generator and prime
     """
-    pass
+    return parseBinary(dePem(data, "DH PARAMETERS") if b"-----BEGIN" in data else data)
